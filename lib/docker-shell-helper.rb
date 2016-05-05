@@ -1,5 +1,6 @@
 require "docker-shell-helper/version"
 require 'rest-client'
+require 'json'
 
 module DockerShellHelper
   class Rancher
@@ -29,7 +30,7 @@ module DockerShellHelper
       data = {
         "attachStdin" => "true",
         "attachStdout" => "true",
-        "command" => "[\"/bin/sh\"]",
+        "command" => ["/bin/sh", "-c", "TERM=xterm-256color; export TERM; [ -x /bin/bash ] && ([ -x /usr/bin/script ] && /usr/bin/script -q -c \"/bin/bash\" /dev/null || exec /bin/bash) || exec /bin/sh"],
         "tty" => "true"
       }
 
