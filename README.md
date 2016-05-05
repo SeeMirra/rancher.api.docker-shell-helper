@@ -23,14 +23,15 @@ Or install it yourself as:
 ```ruby
 require 'docker-shell-helper'
 
-# Can user file reader
+agent = DockerShellHelper::Rancher.new
 
-client = {
-  :"RANCHER_ACCESS_KEY" => ENV['RANCHER_ACCESS_KEY'],
-  :"RANCHER_SECRET_KEY" => ENV['RANCHER_SECRET_KEY']
-}
+agent.rancher_host = 'wargame.cse.nsysu.edu.tw'
+agent.rancher_port = '83'
+agent.access_key = ENV['RANCHER_ACCESS_KEY']
+agent.secret_key = ENV['RANCHER_SECRET_KEY']
+agent.container_name = 'termjs-test'
 
-return DockerShellHelper::Rancher.get_token client.to_json
+return agent.get_token
 ```
 
 ###  More
