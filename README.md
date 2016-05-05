@@ -26,8 +26,8 @@ require 'docker-shell-helper'
 # Can user file reader
 
 client = {
-  :RANCHER_ACCESS_KEY => ENV['RANCHER_ACCESS_KEY']
-  :RANCHER_SECRET_KEY => ENV['RANCHER_SECRET_KEY']
+  :"RANCHER_ACCESS_KEY" => ENV['RANCHER_ACCESS_KEY'],
+  :"RANCHER_SECRET_KEY" => ENV['RANCHER_SECRET_KEY']
 }
 
 return DockerShellHelper::Rancher.get_token client.to_json

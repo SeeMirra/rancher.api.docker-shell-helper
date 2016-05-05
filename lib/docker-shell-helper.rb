@@ -23,22 +23,22 @@ module DockerShellHelper
       end
 
       clientJSON = JSON.parse(client)
-      RANCHER_ACCESS_KEY = clientJSON["RANCHER_ACCESS_KEY"]
-      RANCHER_SECRET_KEY = clientJSON["RANCHER_SECRET_KEY"]
+      ra_key = clientJSON["RANCHER_ACCESS_KEY"]
+      rs_key = clientJSON["RANCHER_SECRET_KEY"]
 
       data = {
-        "attachStdin" => true,
-        "attachStdout" => true,
-        "command" => [],
-        "tty" => true
+        "attachStdin" => "true",
+        "attachStdout" => "true",
+        "command" => "[\"/bin/sh\"]",
+        "tty" => "true"
       }
 
       header = {
-        'Accept' => 'Accept: application/json',
-        'Content-Type' => 'application/json'
+        "Accept" => "application/json",
+        "Content-Type" => "application/json"
       }
 
-      res = RestClient::Request.execute method: :post , url: 'http://wargame.cse.nsysu.edu.tw:83/v1/containers/1i259/?action=execute', user: RANCHER_ACCESS_KEY, password: RANCHER_SECRET_KEY, payload: data, headers: header)
+      res = RestClient::Request.execute method: :post , url: 'http://wargame.cse.nsysu.edu.tw:83/v1/containers/1i259/?action=execute', user: ra_key, password: rs_key, payload: data, headers: header
 
       token = (JSON.parse(res))["token"]
       
