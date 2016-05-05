@@ -1,6 +1,7 @@
 module DockerShellHelper
   class Rancher
-    attr_writer :"rancher_host", :"rancher_port", :"access_key", :"secret_key", :"container_name", :timeout
+    attr_accessor :"rancher_host", :"rancher_port", :"container_name"
+    attr_writer :"access_key", :"secret_key", :timeout
 
     def initialize
       @timeout = 10
