@@ -1,11 +1,12 @@
 module DockerShellHelper
   class Rancher
-    attr_accessor :"rancher_host", :"rancher_port", :"container_name"
+    attr_accessor :"rancher_scheme", :"rancher_host", :"rancher_port", :"container_name"
     attr_writer :"access_key", :"secret_key", :timeout
 
     def initialize
       @timeout = 10
       @rancher_port = "80"
+      @rancher_scheme = "http"
     end
 
     def get_token
@@ -23,7 +24,7 @@ module DockerShellHelper
           "Content-Type" => "application/json"
         }
 
-        res = RestClient::Request.execute method: :post , url: "http://#{@rancher_host}:#{@rancher_port}/v1/containers/#{@id}/?action=execute", user: @access_key, password: @secret_key, payload: data, headers: header, timeout: @timeout
+        res = RestClient::Request.execute method: :post , url: "#{@rancher_scheme}://#{@rancher_host}:#{@rancher_port}/v1/containers/#{@id}/?action=execute", user: @access_key, password: @secret_key, payload: data, headers: header, timeout: @timeout
 
         token = (JSON.parse(res))["token"]
         
@@ -34,7 +35,7 @@ module DockerShellHelper
     private
 
     def get_id(name)
-      res = RestClient::Request.execute method: :get , url: "http://#{@rancher_host}:#{@rancher_port}/v1/containers/?name=#{name}", user: @access_key, password: @secret_key, timeout: @timeout
+      res = RestClient::Request.execute method: :get , url: "#{@rancher_scheme}://#{@rancher_host}:#{@rancher_port}/v1/containers/?name=#{name}", user: @access_key, password: @secret_key, timeout: @timeout
       id = (JSON.parse(res))["data"][0]["id"]
       return id
     end

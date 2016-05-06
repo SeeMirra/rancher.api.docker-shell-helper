@@ -25,11 +25,12 @@ require 'docker-shell-helper'
 
 agent = DockerShellHelper::Rancher.new
 
-agent.rancher_host = 'wargame.cse.nsysu.edu.tw'
-agent.rancher_port = '83'
+agent.rancher_scheme = ENV['RANCHER_SCHEME']
+agent.rancher_host = ENV['RANCHER_HOST']
+agent.rancher_port = ENV['RANCHER_PORT']
 agent.access_key = ENV['RANCHER_ACCESS_KEY']
 agent.secret_key = ENV['RANCHER_SECRET_KEY']
-agent.container_name = 'termjs-test'
+agent.container_name = ENV['CONTAINER_NAME']
 
 return agent.get_token
 ```
