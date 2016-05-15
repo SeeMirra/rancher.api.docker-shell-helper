@@ -16,7 +16,7 @@ module DockerShellHelper
         data = {
           "attachStdin" => "true",
           "attachStdout" => "true",
-          "command" => ["/bin/sh", "-c", "TERM=xterm-256color; export TERM; [ -x /bin/bash ] && ([ -x /usr/bin/script ] && /usr/bin/script -q -c \"#{@rancher_command}\" /dev/null || exec #{@rancher_command} || exec /bin/sh"],
+          "command" => ["/bin/sh", "-c", "TERM=xterm-256color; export TERM; [ -x /bin/bash ] && ([ -x /usr/bin/script ] && /usr/bin/script -q -c \"#{@rancher_command}\" /dev/null || exec \"#{@rancher_command}\") || exec /bin/sh"],
           "tty" => "true"
         }
 
