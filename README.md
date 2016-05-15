@@ -31,10 +31,11 @@ agent.rancher_port = ENV['RANCHER_PORT']
 agent.access_key = ENV['RANCHER_ACCESS_KEY']
 agent.secret_key = ENV['RANCHER_SECRET_KEY']
 agent.container_name = ENV['CONTAINER_NAME']
+agent.container_name = ENV['RANCHER_COMMAND'] # Default is /bin/bash
 
 return agent.get_token
 ```
 
 ###  More
 
-Please take one shot at [NSYSU WARGAME](https://wargame.cse.nsysu.edu.tw/).
+You can take a look at [NSYSU WARGAME](https://wargame.cse.nsysu.edu.tw/).

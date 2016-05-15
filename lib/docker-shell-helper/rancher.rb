@@ -1,12 +1,13 @@
 module DockerShellHelper
   class Rancher
-    attr_accessor :"rancher_scheme", :"rancher_host", :"rancher_port", :"container_name"
+    attr_accessor :"rancher_scheme", :"rancher_host", :"rancher_port", :"container_name", :"rancher_command"
     attr_writer :"access_key", :"secret_key", :timeout
 
     def initialize
       @timeout = 10
       @rancher_port = "80"
       @rancher_scheme = "http"
+      @rancher_command = "/bin/bash"
     end
 
     def get_token
@@ -15,7 +16,7 @@ module DockerShellHelper
         data = {
           "attachStdin" => "true",
           "attachStdout" => "true",
-          "command" => ["/bin/sh", "-c", "TERM=xterm-256color; export TERM; [ -x /bin/bash ] && ([ -x /usr/bin/script ] && /usr/bin/script -q -c \"/bin/bash\" /dev/null || exec /bin/bash) || exec /bin/sh"],
+          "command" => ["/bin/sh", "-c", "TERM=xterm-256color; export TERM; [ -x /bin/bash ] && ([ -x /usr/bin/script ] && /usr/bin/script -q -c \"#{@rancher_command}\" /dev/null || exec #{@rancher_command}) || exec /bin/sh"],
           "tty" => "true"
         }
 
